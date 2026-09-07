@@ -1,0 +1,16 @@
+{
+  "name": "lee-local",
+  "description": "本地插件集合：auto-evolve 会话自动进化系统",
+  "owner": {
+    "name": "lee"
+  },
+  "plugins": [
+    {
+      "name": "auto-evolve",
+      "description": "Session 自动进化：启动检查 + 结束时错误分析自动生成规则 + /auto-evolve:init 项目初始化（强规范）",
+      "version": "1.0.0",
+      "source": "./auto-evolve",
+      "category": "development"
+    }
+  ]
+}

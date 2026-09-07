@@ -1,0 +1,9 @@
+{
+  "name": "auto-evolve",
+  "description": "Session 自动进化系统：启动时运行项目检查清单，结束时分析错误日志并自动生成检查规则。项目首次使用时通过 /auto-evolve:init 按模板初始化（强规范，防发散）。",
+  "version": "1.0.0",
+  "author": {
+    "name": "lee"
+  },
+  "keywords": ["validation", "hooks", "error-tracking", "auto-rules"]
+}
