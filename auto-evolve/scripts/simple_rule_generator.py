@@ -133,10 +133,11 @@ fi
         if pos > 0:
             new_content = content[:pos] + new_check + "\n" + content[pos:]
 
-            # 备份
+            # 备份（并确保备份文件不进 git）
             backup_path = f"{quick_check_path}.backup.{datetime.now().strftime('%Y%m%d%H%M%S')}"
             with open(backup_path, 'w', encoding='utf-8') as f:
                 f.write(content)
+            self._ensure_backup_ignored()
 
             # 写入
             with open(quick_check_path, 'w', encoding='utf-8') as f:
@@ -145,6 +146,17 @@ fi
             return True, f"规则已添加（备份：{backup_path}）"
 
         return False, "找不到插入位置"
+
+    def _ensure_backup_ignored(self):
+        """元反馈#3：生成 .backup.* 时确保 gitignore 覆盖，避免备份文件混入工作区"""
+        gitignore = Path('.gitignore')
+        try:
+            existing = gitignore.read_text(encoding='utf-8') if gitignore.exists() else ''
+            if '*.backup.*' not in existing:
+                with open(gitignore, 'a', encoding='utf-8') as f:
+                    f.write('\n# 自动生成的备份文件\n*.backup.*\n')
+        except Exception:
+            pass
 
 
 def main():
